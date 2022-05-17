@@ -1,11 +1,10 @@
 from flask import Flask
-from models import Restaurante
+from quemTemBoca.db import get_restaurants, init_app
 
 app = Flask(__name__)
 
-@app.route('/<city_name>')
+init_app(app)
+
 @app.route('/')
-def hello(city_name = None):
-        a = Restaurante(nome = 'Nome restaurante', descricao = 'teste descricao', pontuacao = 5)
-        return a.dict()
-        return 'Olá mundo'
+def hello():
+        return {'restaurantes': get_restaurants()}

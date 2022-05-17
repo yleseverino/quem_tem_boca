@@ -1,8 +1,6 @@
 from pydantic import BaseModel, validator, Field, condecimal, HttpUrl
 from datetime import datetime
 
-from quemTemBoca.s3 import get_restaurant_logo, get_restaurant_background
-
 class Restaurante(BaseModel):
     id: int = Field(...)
     nome: str = Field(...)
