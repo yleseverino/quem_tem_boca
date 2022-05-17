@@ -5,10 +5,11 @@ app = Flask(__name__)
 
 init_app(app)
 
-@app.route('/')
-def hello():
+@app.route('/api')
+def api():
+
     restaurant_id = request.args.get('restaurant_id')
+
     if restaurant_id:
-        print(get_restaurant(restaurant_id))
         return get_restaurant(restaurant_id).dict()
     return {'restaurantes': get_restaurants()}

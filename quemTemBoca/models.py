@@ -28,7 +28,7 @@ class Restaurante(BaseModel):
     descricao: str = Field(...)
     criado_em: datetime = datetime.now()
 
-    pratos: List[Prato]
+    pratos: List[Prato] = None
 
     logo_url : HttpUrl
     background_url : HttpUrl
