@@ -1,11 +1,34 @@
 from pydantic import BaseModel, validator, Field, condecimal, HttpUrl
 from datetime import datetime
+from typing import List
+
+class Prato(BaseModel):
+    id: int = Field(...)
+    nome: str = Field(...)
+    descricao: str = Field(...)
+    preco: condecimal( decimal_places=2, gt=0)
+    criado_em: datetime = datetime.now()
+    img_url : HttpUrl
+
+    @validator('nome')
+    def nome_menor_que_255(cls, v):
+        if len(v) > 255:
+            raise ValueError('O numero de caracteres no nome não pode ser maior que 255') 
+        return v
+    
+    @validator('descricao')
+    def descricao_menor_que_1000(cls, v):
+        if len(v) > 1000:
+            raise ValueError('O numero de caracteres no nome não pode ser maior que 255') 
+        return v
 
 class Restaurante(BaseModel):
     id: int = Field(...)
     nome: str = Field(...)
     descricao: str = Field(...)
     criado_em: datetime = datetime.now()
+
+    pratos: List[Prato]
 
     logo_url : HttpUrl
     background_url : HttpUrl
@@ -27,5 +50,7 @@ class Restaurante(BaseModel):
         if len(v) > 1000:
             raise ValueError('O numero de caracteres no nome não pode ser maior que 255') 
         return v
+
+
 
     
