@@ -5,7 +5,7 @@ from os import environ
 import logging
 from flask import g
 
-from quemTemBoca.models import Restaurante, Prato
+from quemTemBoca.models import Restaurante, Prato, User
 from quemTemBoca.s3 import get_restaurant_logo, get_restaurant_background, get_dishe_img
 
 DATABASE_URL = environ.get('DATABASE_URL')
@@ -13,8 +13,9 @@ if not DATABASE_URL:
     logging.exception("ENV variable DATABASE not founded")
     exit(1)
 
-def get_restaurants() -> list[Restaurante]:
+def consulta_db(query_string) -> list[Restaurante]:
     cur = get_db().cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+
     cur.execute('''
             SELECT  
                     r.id,
@@ -22,6 +23,65 @@ def get_restaurants() -> list[Restaurante]:
                     r.descricao,
                     r.pontuacao,
                     r.preco_entrega,
+                    r.telefone,
+                    r.criado_em
+
+            FROM restaurantes r
+            JOIN pratos p ON r.id = p.restaurante_fk
+            WHERE UPPER(r.nome) LIKE %s OR UPPER(r.descricao) LIKE %s OR UPPER(p.nome) LIKE %s OR UPPER(p.descricao) LIKE %s
+            ORDER BY pontuacao DESC
+            ''',('%' + query_string.upper() + '%','%' + query_string.upper() + '%','%' + query_string.upper() + '%','%' + query_string.upper() + '%'))
+    restaurantes = cur.fetchall()
+
+    # Add images links from s3
+    for restaurant in restaurantes:
+        restaurant['logo_url'] = get_restaurant_logo(restaurant['id'])
+        restaurant['background_url'] = get_restaurant_background(restaurant['id'])
+
+    parse_obj_as(list[Restaurante], restaurantes)
+    cur.close()
+
+    return restaurantes
+
+
+def autenticate_user(data) -> User:
+    cur = get_db().cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+
+    cur.execute('''
+            SELECT  
+                    u.id,
+                    u.nome,
+                    u.email,
+                    u.hash_password
+
+            FROM users u
+            where email = %s
+            ''', (data['email'],))
+    user_dict = cur.fetchone()
+    cur.close()
+
+    if not user_dict:
+        return None
+
+    user = User(**user_dict)
+
+    if user.check_password_hash_user(data['password']):
+        return user
+    else:
+        return None
+
+def get_restaurants() -> list[Restaurante]:
+
+    cur = get_db().cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+
+    cur.execute('''
+            SELECT  
+                    r.id,
+                    r.nome,
+                    r.descricao,
+                    r.pontuacao,
+                    r.preco_entrega,
+                    r.telefone,
                     r.criado_em
 
             FROM restaurantes r
