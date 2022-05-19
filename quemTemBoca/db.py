@@ -110,7 +110,8 @@ def get_restaurant(restaurant_id) -> Restaurante:
                     r.descricao,
                     r.pontuacao,
                     r.preco_entrega,
-                    r.criado_em
+                    r.criado_em,
+                    r.telefone
 
             FROM restaurantes r
             WHERE r.id = %s

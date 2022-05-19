@@ -39,5 +39,10 @@ def login_api():
     return { 'authenticated': True,'JWT': token }
 
 @app.route('/api/consulta/<query_string>')
-def consulta(query_string):
+@app.route('/api/consulta/')
+def consulta(query_string = None):
+
+    if not query_string:
+        return api()
+
     return {'restaurantes': consulta_db(query_string)}

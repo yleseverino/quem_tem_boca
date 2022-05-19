@@ -1,6 +1,18 @@
 from pydantic import BaseModel, validator, Field, condecimal, HttpUrl
 from datetime import datetime
 from typing import List
+from werkzeug.security import check_password_hash, generate_password_hash
+
+
+class User(BaseModel):
+    id: int
+    nome: str
+    email: str
+    hash_password: str
+
+    def check_password_hash_user(self, input_password):
+        return check_password_hash(self.hash_password, input_password)
+
 
 class Prato(BaseModel):
     id: int = Field(...)
@@ -19,12 +31,13 @@ class Prato(BaseModel):
     @validator('descricao')
     def descricao_menor_que_1000(cls, v):
         if len(v) > 1000:
-            raise ValueError('O numero de caracteres no nome não pode ser maior que 255') 
+            raise ValueError('O numero de caracteres da desc não pode ser maior que 1000') 
         return v
 
 class Restaurante(BaseModel):
     id: int = Field(...)
     nome: str = Field(...)
+    telefone: str = Field(...)
     descricao: str = Field(...)
     criado_em: datetime = datetime.now()
 
