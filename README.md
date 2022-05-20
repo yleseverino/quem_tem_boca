@@ -61,6 +61,6 @@ link: [quemtemboca.mybluemix.net/](https://quemtemboca.mybluemix.net/)
     ```
 4. Para ter um relatorio detalhado da cobertura dos testes basta rodar o seguinde comando:
     ```bash
-    pytest --cov-report html --cov=quemTemBoca test/   
+    pytest --cov-report html --cov=quemTemBoca tests/   
     ```
 5. Depois só abrir o arquivo index.html no seu navegador e ver o relatório.
