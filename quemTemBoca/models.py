@@ -39,6 +39,7 @@ class Restaurante(BaseModel):
     nome: str = Field(...)
     telefone: str = Field(...)
     descricao: str = Field(...)
+    endereco: str = None
     criado_em: datetime = datetime.now()
 
     pratos: List[Prato] = None

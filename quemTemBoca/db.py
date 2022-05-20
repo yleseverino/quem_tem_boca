@@ -82,7 +82,8 @@ def get_restaurants() -> list[Restaurante]:
                     r.pontuacao,
                     r.preco_entrega,
                     r.telefone,
-                    r.criado_em
+                    r.criado_em,
+                    r.endereco
 
             FROM restaurantes r
             ORDER BY pontuacao DESC
@@ -111,7 +112,8 @@ def get_restaurant(restaurant_id) -> Restaurante:
                     r.pontuacao,
                     r.preco_entrega,
                     r.criado_em,
-                    r.telefone
+                    r.telefone,
+                    r.endereco
 
             FROM restaurantes r
             WHERE r.id = %s

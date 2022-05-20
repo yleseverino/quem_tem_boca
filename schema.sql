@@ -5,6 +5,7 @@ CREATE TABLE restaurantes(
     telefone VARCHAR(12) NOT NULL,
     pontuacao NUMERIC(5,2),
     preco_entrega NUMERIC(5,2),
+    endereco VARCHAR(255),
     criado_em TIMESTAMP default current_timestamp
 );
 
