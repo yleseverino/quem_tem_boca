@@ -8,7 +8,7 @@ O app está hospedado na IBM Cloud utilizando a plataforma Cloud foundry, que é
 
 link: [quemtemboca.mybluemix.net/](https://quemtemboca.mybluemix.net/)
 
-## requirements
+## Requirements
 
 - A Postgres Database
 - S3 or (S3 Like) object sotarage (Optional)
