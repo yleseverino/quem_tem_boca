@@ -15,11 +15,11 @@ app.component('restaurante-card-details', {
         <div class="col-9">
         <h5 class="card-title">{{ restaurante.nome }} <i style="color:yellow; font-size:1.2em;" class="bi bi-star-fill"></i> {{ restaurante.pontuacao }} 
         </h5>
-        <p class="card-text">{{ restaurante.descricao }} <div  v-if="preco_entrega > 10">
-        <i style="color:red; font-size:1.2em;" class="bi bi-truck"></i> R$ {{ preco_entrega.replace(".", ",") }}  
+        <p class="card-text">{{ restaurante.descricao }} <div  v-if="restaurante.preco_entrega*1 > 10">
+        <i style="color:red; font-size:1.2em;" class="bi bi-truck"></i> R$ {{ restaurante.preco_entrega.replace(".", ",") }}  
       </div>
-      <div  v-else-if="preco_entrega > 0">
-        <i style="color:orange; font-size:1.2em;" class="bi bi-truck"></i> R$ {{ preco_entrega.replace(".", ",") }}  
+      <div  v-else-if="restaurante.preco_entrega*1 > 0">
+        <i style="color:orange; font-size:1.2em;" class="bi bi-truck"></i> R$ {{ restaurante.preco_entrega.replace(".", ",") }}  
       </div>
       <div  v-else >
       <i style="color:green; font-size:1.2em;" class="bi bi-truck"></i> Gratis
