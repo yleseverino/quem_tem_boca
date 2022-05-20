@@ -60,7 +60,7 @@ app.component('restaurante-card', {
         </div>
       </div>
       <div class="card-footer">
-        <a href="#" class="card-link">Ver cardapio</a>
+        <router-link :to="'/restaurante/'+restaurante_id" >Ver cardapio</router-link>
         <a :href="'tel:'+telefone" class="card-link">Ligar</a>
       </div>
     </div>
