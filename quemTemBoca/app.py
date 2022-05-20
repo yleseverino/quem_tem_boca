@@ -2,7 +2,6 @@ from os import environ
 from flask import Flask, request
 from datetime import datetime, timedelta
 import jwt
-
 from quemTemBoca.db import get_restaurants, init_app, get_restaurant, autenticate_user, consulta_db
 
 
