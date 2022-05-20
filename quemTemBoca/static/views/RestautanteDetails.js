@@ -11,7 +11,8 @@ const RestauranteDetails = {
     /*html*/
     `
     <header-bar @search-food="search"></header-bar>
-    <h1>{{ restaurante }}</h1>
+    <restaurante-card-details :restaurante=restaurante></restaurante-card-details>
+    <dishes-card :pratos="restaurante.pratos"></dishes-card>
     `,
     
 
