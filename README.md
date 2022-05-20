@@ -6,7 +6,7 @@
 
 O app está hospedado na IBM Cloud utilizando a plataforma Cloud foundry, que é um serviço the (PaaS - Platform as a service), muito parecido com Heroku, só que com a diferença de ser totalmente Open source 😉.
 
-link: [openweatherflask.mybluemix.net](https://openweatherflask.mybluemix.net)
+link: [quemtemboca.mybluemix.net/](https://quemtemboca.mybluemix.net/)
 
 ## requirements
 
