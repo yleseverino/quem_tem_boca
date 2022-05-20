@@ -3,3 +3,4 @@ python-dotenv
 pydantic
 psycopg2-binary
 PyJWT
+uwsgi

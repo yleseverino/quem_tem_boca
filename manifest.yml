@@ -1,0 +1,9 @@
+version: 1
+applications:
+  - name: quemtemboca
+    routes:
+    - route: quemtemboca.mybluemix.net 
+    memory: 128MB
+    command: uwsgi uwsgi.ini
+    services:
+    - my-logs
