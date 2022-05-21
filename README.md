@@ -34,11 +34,11 @@ link: [quemtemboca.mybluemix.net/](https://quemtemboca.mybluemix.net/)
     ```
     pip install -r requirements.txt
     ```
-7. Dar uma onlhada no arquivo de variaveis e criar o seu .env:
+7. Dar uma olhada no arquivo de variaveis e criar o seu .env:
     ```bash
     cat .env.example > .env
     ```
-    Sera necessario configurar a variavel de ambiente DATABASE_URL com a String the conneção da sua base de dado igual a representada no exemplo.
+    Sera necessario configurar a variavel de ambiente DATABASE_URL com a String the conexão da sua base de dado igual a representada no exemplo.
 8. Rodar o app
     ```bash
     flask run
